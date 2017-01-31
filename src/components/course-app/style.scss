@@ -1,0 +1,13 @@
+.course-app {
+    padding: $spacer-y * 2 $spacer-x;
+
+    &__learning-opportunity-type {
+        padding: $spacer-y * 2 0rem;
+        border-bottom: 1px solid darken($gray-lighter, 5%);
+
+        &:last-child {
+            margin-bottom: 0rem;
+            border-bottom: 0px none;
+        }
+    }
+}

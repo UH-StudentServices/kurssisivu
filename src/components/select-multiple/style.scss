@@ -1,0 +1,15 @@
+.select-multiple {
+    &__option {
+        &--active {
+            background-color: lighten($brand-primary, 50%);
+
+            &:hover {
+                background-color: lighten($brand-primary, 45%);
+            }
+
+            &:active {
+                background-color: $brand-primary !important;
+            }
+        }
+    }
+}

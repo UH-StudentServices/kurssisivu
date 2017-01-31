@@ -1,0 +1,35 @@
+.course {
+    padding: $spacer-y * 0.5 0rem;
+    box-sizing: border-box;
+
+    &__header {
+        margin-bottom: $spacer-y * 0.5;
+    }
+
+    &__language {
+        border-radius: 50%;
+        width: 1rem;
+        height: 1rem;
+    }
+
+    &__footer {
+        display: flex;
+        justify-content: space-between;
+    }    
+
+    &__language {
+        margin-right: $spacer-x * 0.25;
+
+        &:last-child {
+            margin-right: 0rem;
+        }
+    }
+
+    &__dates, &__badges {
+        margin-right: $spacer-x;
+    }
+
+    &__link {
+        display: block;
+    }
+}
