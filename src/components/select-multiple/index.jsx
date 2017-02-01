@@ -21,7 +21,7 @@ class SelectMultiple extends React.Component {
     state: State
 
     static defaultProps = {
-        onChange: (semesters: string[]) => {},
+        onChange: (values: string[]) => {},
     }
 
     constructor() {

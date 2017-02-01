@@ -7,6 +7,10 @@ const translations = {
         "year": "Vuosi",
         "loading": "Ladataan",
         "findCourses": "Löydä kursseja",
+        "finnish": "Suomi",
+        "swedish": "Ruotsi",
+        "english": "Englanti",
+        "language": "Kieli",
         "learningOpportunityTypeCodes":{
             "c1":"Yleisopinnot",
             "c2":"Aineopinnot",
@@ -70,6 +74,10 @@ const translations = {
         "year": "År",
         "loading": "Laddar",
         "findCourses": "Hitta kurser",
+        "finnish": "Finska",
+        "swedish": "Svenska",
+        "english": "Engelska",
+        "language": "Språk",
         "learningOpportunityTypeCodes":{
             "c1":"Allmänna studier",
             "c2":"Ämnesstudier",
@@ -133,6 +141,10 @@ const translations = {
         "year": "Year",
         "loading": "Loading",
         "findCourses": "Find courses",
+        "finnish": "Finnish",
+        "swedish": "Swedish",
+        "english": "English",
+        "language": "Language",
         "learningOpportunityTypeCodes":{
             "c1":"General studies",
             "c2":"Intermediate studies",

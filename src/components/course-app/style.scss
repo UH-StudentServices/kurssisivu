@@ -1,6 +1,21 @@
 .course-app {
     padding: $spacer-y * 2 $spacer-x;
 
+    @include media-breakpoint-down(md) {
+        &__header {
+            flex-direction: column;
+        }
+
+        &__languages {
+            margin-top: $spacer-y;
+        }
+    }
+
+    &__header {
+        display: flex;
+        justify-content: space-between;
+    }
+
     &__learning-opportunity-type {
         padding: $spacer-y * 2 0rem;
         border-bottom: 1px solid darken($gray-lighter, 5%);

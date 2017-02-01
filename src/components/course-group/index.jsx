@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 
 import Course from 'components/course';
 import type { Course as CourseType } from 'flow/types';
-import { selectActiveTranslations } from 'selectors/translations';
+import connectTranslations from 'components/connect-translations';
 
 type Props = {
     courses: CourseType[],
@@ -60,10 +60,6 @@ class CourseGroup extends React.Component {
     }
 }
 
-const mapStateToProps = (state: Object) => ({
-    translations: selectActiveTranslations(state),
-});
+const TranslatedCourseGroup = connectTranslations()(CourseGroup);
 
-export default connect(
-    mapStateToProps,
-)(CourseGroup);
+export default TranslatedCourseGroup;

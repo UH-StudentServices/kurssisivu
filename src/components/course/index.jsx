@@ -4,8 +4,8 @@ import React from 'react';
 import moment from 'moment';
 import { connect } from 'react-redux';
 
+import connectTranslations from 'components/connect-translations';
 import type { Course as CourseType } from 'flow/types';
-import { selectActiveTranslations } from 'selectors/translations';
 import Flag from 'components/flag';
 
 type Props = {
@@ -89,9 +89,10 @@ class Course extends React.Component {
 
 const mapStateToProps = (state: Object) => ({
     language: state.settings.language,
-    translations: selectActiveTranslations(state),
 });
+
+const TranslatedCourse = connectTranslations()(Course);
 
 export default connect(
     mapStateToProps,
-)(Course);
+)(TranslatedCourse);
