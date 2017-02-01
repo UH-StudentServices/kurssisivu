@@ -5,8 +5,6 @@ import 'babel-polyfill';
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
-import moment from 'moment';
-import 'moment-range';
 
 import './styles/index.scss';
 
