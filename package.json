@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "./node_modules/ava/cli.js",
-    "dev": "NODE_ENV=development ./node_modules/webpack/bin/webpack.js",
+    "dev": "./node_modules/webpack-dev-server/bin/webpack-dev-server.js && NODE_ENV=development ./node_modules/webpack/bin/webpack.js",
     "build": "rm -rf ./dist && NODE_ENV=production ./node_modules/webpack/bin/webpack.js",
     "flow-check": "./node_modules/flow-bin/cli.js check"
   },
@@ -33,7 +33,8 @@
     "node-sass": "4.4.0",
     "postcss-loader": "1.2.2",
     "sass-loader": "4.1.1",
-    "webpack": "2.2.0"
+    "webpack": "2.2.0",
+    "webpack-dev-server": "1.16.3"
   },
   "dependencies": {
     "axios": "0.15.3",
