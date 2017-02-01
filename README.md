@@ -20,6 +20,6 @@ npm run-script dev
 
 Webpack will output a `app.js` and `app.css` files inside the `dist` folder. Running the above command will also launch webpack dev server at port `8080`.
 
-### Open Browser
+### Open browser
 
 And navigate to [http://localhost:8080](http://localhost:8080).
