@@ -6,7 +6,8 @@
   "scripts": {
     "test": "./node_modules/ava/cli.js",
     "dev": "NODE_ENV=development ./node_modules/webpack/bin/webpack.js",
-    "build": "rm -rf ./dist && NODE_ENV=production ./node_modules/webpack/bin/webpack.js"
+    "build": "rm -rf ./dist && NODE_ENV=production ./node_modules/webpack/bin/webpack.js",
+    "flow-check": "./node_modules/flow-bin/cli.js check"
   },
   "ava": {
     "require": [
@@ -28,6 +29,7 @@
     "babel-preset-stage-0": "^6.22.0",
     "css-loader": "0.26.1",
     "extract-text-webpack-plugin": "2.0.0-rc.2",
+    "flow-bin": "0.38.0",
     "node-sass": "4.4.0",
     "postcss-loader": "1.2.2",
     "sass-loader": "4.1.1",

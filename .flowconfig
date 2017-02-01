@@ -5,7 +5,7 @@
 ./src
 
 [libs]
-.*/src/flow/declarations
+src/flow/declarations/index.js
 
 [options]
 module.file_ext=.jsx
