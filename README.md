@@ -4,7 +4,7 @@
 
 ### Install dependencies
 
-To install the dependecies run:
+To install the dependencies run:
 
 ```
 npm install
