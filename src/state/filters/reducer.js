@@ -8,7 +8,7 @@ import { UPDATE_YEAR, UPDATE_SEMESTERS, UPDATE_LANGUAGES } from './actions';
 function withinDates(date: Date, dates: Date[]): boolean {
     const [start, end] = dates;
 
-    if(+date >= +start && +date < +end) {
+    if(+date >= +start && +date <= +end) {
         return true;
     } else {
         return false;
