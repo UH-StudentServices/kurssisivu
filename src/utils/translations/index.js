@@ -44,7 +44,9 @@ const translations = {
             "c40":"Maisteriohjelma",
             "c41":"Tutkijakoulu",
             "c42":"Tohtoriohjelma",
-            "c99":"Muut opinnot"
+            "c99":"Muut opinnot",
+            "c_1": "Seminaarit",
+            "c_2": "Laboratoriotyöt"
         },
         "realizationTypeCodes":{
             "c3":"Harjoittelu",
@@ -111,7 +113,9 @@ const translations = {
             "c40":"Magisterprogram",
             "c41":"Forskarskola",
             "c42":"Doktorandprogram",
-            "c99":"Övriga studier"
+            "c99":"Övriga studier",
+            "c_1": "Seminarier",
+            "c_2": "Laboratorium arbete"
         },
         "realizationTypeCodes":{
             "c3":"Praktik",
@@ -178,7 +182,9 @@ const translations = {
             "c40":"Master program",
             "c41":"Researcher school",
             "c42":"Doctoral programme",
-            "c99":"Other studies"
+            "c99":"Other studies",
+            "c_1": "Seminars",
+            "c_2": "Laboratory works"
         },
         "realizationTypeCodes":{
             "c3":"Practice",

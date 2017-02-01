@@ -18,6 +18,6 @@ load()
             <Provider store={store}>
                 <CourseApp />
             </Provider>,
-            document.getElementById('root'),
+            document.getElementById('course-app-root'),
         );
     });

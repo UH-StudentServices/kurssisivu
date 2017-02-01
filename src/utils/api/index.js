@@ -8,6 +8,9 @@ const client = axios.create({
     baseURL: 'https://opetushallinto.cs.helsinki.fi',
 }); 
 
+const SEMINAR_REALISATION = '10';
+const LABORATORY_REALISATION = '22';
+
 function toCourse(rawCourse: Object): Course {
     const { 
         course_id, 
@@ -18,8 +21,16 @@ function toCourse(rawCourse: Object): Course {
         learningopportunity_id, 
         realisation_name, 
         realisation_type_code,
-         learningopportunity_type_code,
+        learningopportunity_type_code,
     } = rawCourse;
+
+    let learningOpportunityTypeCode = learningopportunity_type_code.toString();
+
+    if (realisation_type_code.toString() === SEMINAR_REALISATION) {
+        learningOpportunityTypeCode = '_1';
+    } else if (realisation_type_code.toString() === LABORATORY_REALISATION) {
+        learningOpportunityTypeCode = '_2';
+    }
 
     return {
         courseId: course_id.toString(),
@@ -27,28 +38,19 @@ function toCourse(rawCourse: Object): Course {
         startDate: new Date(start_date),
         endDate: new Date(end_date),
         creditPoints: credit_points,
-        learningOpportunityId: learningopportunity_id,
+        learningOpportunityId: learningopportunity_id.toString(),
         realisationName: realisation_name,
-        learningOpportunityTypeCode: learningopportunity_type_code,
-        realisationTypeCode: realisation_type_code,
+        learningOpportunityTypeCode,
+        realisationTypeCode: realisation_type_code.toString(),
     };
 }
 
-const mockCourse = (id: string): Course => { 
-    return {
-        courseId: id, 
-        learningOpportunityId: '1', 
-        startDate: new Date(), 
-        endDate: new Date(), 
-        creditPoints: 2, 
-        languages: [{ langcode: 'en' }, { langcode: 'fi' }], 
-        realisationTypeCode: '3', 
-        learningOpportunityTypeCode: parseInt(id) % 2 === 0 ? '12' : '3',
-        realisationName: [{ langcode: 'fi', text: 'Ohjelmoinnin perusteet' }],
-    };
+function filterExams(course: Course): boolean {
+    return course.realisationTypeCode !== '8';
 }
 
 export function getCourses(): Promise<Course[]> {
     return client.get('/courses_list.json')
-        .then(({ data }) => data.map(toCourse));
+        .then(({ data }) => data.map(toCourse))
+        .then(courses => courses.filter(filterExams));
 }

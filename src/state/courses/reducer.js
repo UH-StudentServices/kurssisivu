@@ -12,7 +12,7 @@ const initialState = {
     coursesByLearningOpportunities: {}
 };
 
-const learningOpportunityOrdering = ['12', '2', '3', '33', '4'];
+const learningOpportunityOrdering = ['12', '2', '_2', '3', '33', '_1', '4'];
 
 const sortByLearningOpportunities = (a: string, b: string): number => {
     const aIndex = learningOpportunityOrdering.indexOf(a);
