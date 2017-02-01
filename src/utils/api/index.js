@@ -4,8 +4,6 @@ import axios from 'axios';
 
 import type { Course } from 'flow/types';
 
-const credentials = btoa('admin:linuxwasinventedhere1991');
-
 const client = axios.create({
     baseURL: 'https://opetushallinto.cs.helsinki.fi',
 }); 
@@ -51,10 +49,6 @@ const mockCourse = (id: string): Course => {
 }
 
 export function getCourses(): Promise<Course[]> {
-    /*const courses = new Array(20).fill(null)
-        .map((value, index) => mockCourse(index.toString()));
-
-    return Promise.resolve(courses);*/
     return client.get('/courses_list.json')
         .then(({ data }) => data.map(toCourse));
 }

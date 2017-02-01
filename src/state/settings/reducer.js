@@ -2,7 +2,8 @@
 
 import { createReducer } from 'redux-create-reducer';
 
-import { getClientLanguage } from 'utils/store';
+import { getClientLanguage, setClientLanguage } from 'utils/store';
+import { UPDATE_LANGUAGE } from './actions';
 
 const availableLanguages = [
     { code: 'fi', name: 'Suomi' }, 
@@ -15,4 +16,10 @@ const initialState = {
     availableLanguages,
 };
 
-export default createReducer(initialState, {});
+export default createReducer(initialState, {
+    [UPDATE_LANGUAGE](state, { language }) {
+        setClientLanguage(language);
+
+        return Object.assign({}, state, { language });
+    },
+});

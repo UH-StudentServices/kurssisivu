@@ -40,7 +40,7 @@ export class CourseApp extends React.Component {
 
     renderLoading() {
         return (
-            <div className="text-center">
+            <div className="text-center text-muted">
                 {this.props.translations.loading}...
             </div>
         );

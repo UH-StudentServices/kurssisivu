@@ -7,7 +7,8 @@
         }
 
         &__languages {
-            margin-top: $spacer-y;
+            order: -1;
+            margin-bottom: $spacer-y;
         }
     }
 

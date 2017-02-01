@@ -20,8 +20,12 @@ class Course extends React.Component {
     renderLink() {
         const { learningOpportunityId, courseId } = this.props.course;
 
+        const languagePath = ['fi', 'sv'].includes(this.props.language)
+            ? `${this.props.language}/`
+            : '';
+
         return (
-            <a className="course__link" target="_blank" href={`https://courses.helsinki.fi/${learningOpportunityId}/${courseId}`}>
+            <a className="course__link" target="_blank" href={`https://courses.helsinki.fi/${languagePath}${learningOpportunityId}/${courseId}`}>
                 {this.getCourseName()}
             </a>
         );
