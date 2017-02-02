@@ -5,14 +5,14 @@ import { chunk } from 'lodash';
 import { connect } from 'react-redux';
 
 import Course from 'components/course';
-import type { Course as CourseType } from 'flow/types';
+import type { Course as CourseType, Translations } from 'flow/types';
 import connectTranslations from 'components/connect-translations';
 
 type Props = {
     courses: CourseType[],
     columns: number,
     learningOpportunityId: string,
-    translations: Object,
+    translations: Translations,
 };
 
 class CourseGroup extends React.Component {
@@ -47,13 +47,19 @@ class CourseGroup extends React.Component {
     }
 
     getLearningOpportunityText(): string {
-        return this.props.translations.learningOpportunityTypeCodes[`c${this.props.learningOpportunityId}`];
+        return this.props.translations.t(`learningOpportunityTypeCodes.c${this.props.learningOpportunityId}`);
     }
 
     render() {
         return (
             <div className="course-group">
-                <h2 className="course-group__title">{this.getLearningOpportunityText()}</h2>
+                <h2 className="course-group__title">
+                    {this.getLearningOpportunityText()}
+                    {' '}
+                    <small className="text-muted">
+                        {this.props.translations.t('coursesCount', { count: this.props.courses.length })}
+                    </small>
+                </h2>
                 {this.renderList()}
             </div>
         );

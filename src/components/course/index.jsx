@@ -5,13 +5,13 @@ import moment from 'moment';
 import { connect } from 'react-redux';
 
 import connectTranslations from 'components/connect-translations';
-import type { Course as CourseType } from 'flow/types';
+import type { Course as CourseType, Translations } from 'flow/types';
 import Flag from 'components/flag';
 
 type Props = {
     course: CourseType,
     language: string,
-    translations: Object,
+    translations: Translations,
 }
 
 class Course extends React.Component {
@@ -32,7 +32,7 @@ class Course extends React.Component {
     }
 
     getRealisationTypeText() {
-        return this.props.translations.realizationTypeCodes[`c${this.props.course.realisationTypeCode}`];
+        return this.props.translations.t(`realizationTypeCodes.c${this.props.course.realisationTypeCode}`);
     }
 
     formatDate(date: Date): string {

@@ -31,6 +31,12 @@ module.exports = {
         modules: [path.join(__dirname, 'node_modules'), path.join(__dirname, 'src')],
     },
     plugins: [
+        new webpack.DefinePlugin({
+            'process.env': {
+                NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'development'),
+                ASSETS_URL: JSON.stringify(isDevelopment ? '/dist' : 'http://kalleilv.users.cs.helsinki.fi/course-app/dist'),  
+            },
+        }),
         new ExtractTextPlugin('app.css'),
         isDevelopment ? null : new webpack.optimize.UglifyJsPlugin({ minimize: true }),
     ].filter(p => !!p),

@@ -11,6 +11,7 @@ const translations = {
         "swedish": "Ruotsi",
         "english": "Englanti",
         "language": "Kieli",
+        "coursesCount": "%{count} kurssia",
         "learningOpportunityTypeCodes":{
             "c1":"Yleisopinnot",
             "c2":"Aineopinnot",
@@ -80,6 +81,7 @@ const translations = {
         "swedish": "Svenska",
         "english": "Engelska",
         "language": "Språk",
+        "coursesCount": "%{count} kurser",
         "learningOpportunityTypeCodes":{
             "c1":"Allmänna studier",
             "c2":"Ämnesstudier",
@@ -149,6 +151,7 @@ const translations = {
         "swedish": "Swedish",
         "english": "English",
         "language": "Language",
+        "coursesCount": "%{count} courses",
         "learningOpportunityTypeCodes":{
             "c1":"General studies",
             "c2":"Intermediate studies",

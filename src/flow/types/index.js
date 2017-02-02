@@ -1,5 +1,7 @@
 // @flow
 
+import Polyglot from 'node-polyglot';
+
 export type Course = {
     courseId: string,
     creditPoints: number,
@@ -10,4 +12,8 @@ export type Course = {
     realisationName: ({ langcode: string, text: string })[],
     realisationTypeCode: string,
     startDate: Date,
+};
+
+export type Translations = {
+    t: (string, params?: Object) => string
 };

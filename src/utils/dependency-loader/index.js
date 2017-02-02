@@ -34,7 +34,7 @@ export function load(): Promise<any> {
          document.addEventListener('DOMContentLoaded', () => {
              Promise.all([
                 loadStyle('https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/2.8.0/css/flag-icon.css'),
-                loadStyle('/dist/app.css'),
+                loadStyle(`${process.env.ASSETS_URL}/app.css`),
             ]).then(resolve);
          });
     });

@@ -7,9 +7,10 @@ import { connect } from 'react-redux';
 import connectTranslations from 'components/connect-translations';
 import { updateYear, updateSemesters, updateLanguages } from 'state/filters';
 import { fetchCourses } from 'state/courses';
+import type { Translations } from 'flow/types';
 
 type Props = {
-    translations: Object,
+    translations: Translations,
     year: number,
     semesters: string[],
     languages: string[],
@@ -31,40 +32,40 @@ class SearchFilters extends React.Component {
     renderYearFilter() {
         return (
             <div className="search-filters__filter form-group">
-                <input type="number" id="search-filters-year" value={this.props.year} onChange={this.onYearChange.bind(this)} placeholder={this.props.translations.year} className="form-control search-filters__year-input" />
-                <div className="text-muted search-filters__label">{this.props.translations.year}</div>
+                <input type="number" id="search-filters-year" value={this.props.year} onChange={this.onYearChange.bind(this)} placeholder={this.props.translations.t('year')} className="form-control search-filters__year-input" />
+                <div className="text-muted search-filters__label">{this.props.translations.t('year')}</div>
             </div>
         );
     }
 
     renderSemesterFilter() {
-        const options = ['spring', 'autumn', 'summer'].map(value => ({ value, label: this.props.translations[value] }));
+        const options = ['spring', 'autumn', 'summer'].map(value => ({ value, label: this.props.translations.t(value) }));
 
         return (
             <div className="search-filters__filter">
                 <SelectMultiple
                     options={options}
                     values={this.props.semesters}
-                    label={this.props.translations.semester}
+                    label={this.props.translations.t('semester')}
                     onChange={this.props.onSemestersChange}
                 />
-                <div className="text-muted search-filters__label">{this.props.translations.semester}</div>
+                <div className="text-muted search-filters__label">{this.props.translations.t('semester')}</div>
             </div>
         );
     }
 
     renderLanguageFilter() {
-        const options = ['finnish', 'swedish', 'english'].map(value => ({ value, label: this.props.translations[value] }));
+        const options = ['finnish', 'swedish', 'english'].map(value => ({ value, label: this.props.translations.t(value) }));
 
         return (
             <div className="search-filters__filter">
                 <SelectMultiple
                     options={options}
                     values={this.props.languages}
-                    label={this.props.translations.language}
+                    label={this.props.translations.t('language')}
                     onChange={this.props.onLanguagesChange}
                 />
-                <div className="text-muted search-filters__label">{this.props.translations.language}</div>
+                <div className="text-muted search-filters__label">{this.props.translations.t('language')}</div>
             </div>
         );
     }
@@ -77,7 +78,7 @@ class SearchFilters extends React.Component {
         return (
             <div className="search-filters__filter">
                 <button disabled={!this.filtersAreValid()} className="btn btn-primary" onClick={this.props.onApplyFilters}>
-                    {this.props.translations.findCourses}
+                    {this.props.translations.t('findCourses')}
                 </button>
             </div>
         );
