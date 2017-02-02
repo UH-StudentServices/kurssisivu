@@ -47,8 +47,6 @@ class SearchFilters extends React.Component {
         const newSemesters = this.semesterIsActive(semester)
             ? [...[], ...this.props.semesters].filter(s => s !== semester)
             : [...[], ...this.props.semesters, semester];
-        
-        console.log(newSemesters);
 
         this.props.onSemestersChange(newSemesters);
     }
