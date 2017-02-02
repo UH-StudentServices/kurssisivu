@@ -76,12 +76,6 @@ class Course extends React.Component {
                         {this.renderDates()}
                     </div>
 
-                    <div className="course__badges">
-                        <span className="badge badge-primary">
-                            {this.getRealisationTypeText()}
-                        </span>
-                    </div>
-
                     <div className="course__language-list">
                         {this.renderLanguages()}
                     </div>

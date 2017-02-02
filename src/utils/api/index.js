@@ -1,6 +1,7 @@
 // @flow
 
 import axios from 'axios';
+import { intersection } from 'lodash';
 
 import type { Course } from 'flow/types';
 
@@ -49,8 +50,24 @@ function filterExams(course: Course): boolean {
     return course.realisationTypeCode !== '8';
 }
 
-export function getCourses(): Promise<Course[]> {
+function filterByLanguages(languages: string[]): (Course) => boolean {
+    return (course: Course) => {
+        const courseLanguages = course.languages.map(({ langcode }) => langcode);
+
+        return intersection(courseLanguages, languages).length > 0;
+    };
+}
+
+export function getCourses({ languages }: { languages?: string[] }): Promise<Course[]> {
+    const filters = [filterExams];
+    
+    if (languages && languages.length > 0) {
+        filters.push(filterByLanguages(languages));
+    }
+
+    const mergedFilter = (course: Course): boolean => !filters.map(f => f(course)).some(value => !value);
+
     return client.get('/courses_list.json')
         .then(({ data }) => data.map(toCourse))
-        .then(courses => courses.filter(filterExams));
+        .then(courses => courses.filter(mergedFilter));
 }

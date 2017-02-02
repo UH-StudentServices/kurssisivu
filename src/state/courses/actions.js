@@ -7,10 +7,12 @@ export const FETCH_COURSES_SUCCESS = 'COURSES_FETCH_COURSES_SUCCESS';
 export const FETCH_COURSES_ERROR = 'COURSES_FETCH_COURSES_ERROR';
 
 export function fetchCourses() {
-    return (dispatch: any, getState: any, { api }: { api: any }) => {
+    return (dispatch: () => void, getState: () => Object, { api }: { api: any }) => {
         dispatch(fetchCoursesAction());
 
-        return api.getCourses()
+        const { filters: { languages } } = getState();
+
+        return api.getCourses({ languages })
             .then(courses => dispatch(fetchCoursesSuccess(courses)))
             .catch(() => dispatch(fetchCoursesError()));
     };
