@@ -23,7 +23,7 @@ const SM_BREAK_POINT = 780;
 class CourseAppHeader extends React.Component {
     props: Props
     state: State
-    filtersNode: any
+    headerNode: any
     onScroll: () => void
 
     static defaultProps = {}
@@ -53,7 +53,7 @@ class CourseAppHeader extends React.Component {
             return;
         }
 
-        const stuck = document.body.scrollTop >= this.filtersNode.offsetTop + this.filtersNode.offsetHeight + SCROLL_OFFSET;
+        const stuck = document.body.scrollTop >= this.headerNode.offsetTop + this.headerNode.offsetHeight + SCROLL_OFFSET;
         
         this.setState({
             stuck,
@@ -70,7 +70,7 @@ class CourseAppHeader extends React.Component {
             : '';
 
         return (
-            <div className={`course-app-header ${stuckClass}`} ref={node => this.filtersNode = node}>
+            <div className={`course-app-header ${stuckClass}`} ref={node => this.headerNode = node}>
                 <div className={`course-app-header__container ${containerClass}`}>
                     <div className="course-app-header__filters">
                         <SearchFilters />
