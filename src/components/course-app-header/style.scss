@@ -1,0 +1,35 @@
+.course-app-header {
+    &__container {
+        display: flex;
+        justify-content: space-between;
+        background-color: white;
+    }
+
+    &--stuck {
+        position: fixed;
+        z-index: 99;
+        top: 0rem;
+        left: 0rem;
+        width: 100%;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
+
+        .course-app-header__container {
+            padding-top: $spacer-y;
+        }
+
+        .search-filters__label {
+            display: none;
+        }
+    }
+
+    @include media-breakpoint-down(md) {
+        &__container {
+            flex-direction: column;
+        }
+
+        &__languages {
+            order: -1;
+            margin-bottom: $spacer-y;
+        }
+    }
+}
