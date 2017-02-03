@@ -4,6 +4,7 @@ import React from 'react';
 import { Button, ButtonGroup } from 'reactstrap';
 import { connect } from 'react-redux';
 
+import Flag from 'components/flag';
 import { updateLanguage } from 'state/settings';
 
 type Props = {
@@ -28,7 +29,7 @@ class LanguageSelector extends React.Component {
                     active={isActive}
                     onClick={() => { this.props.onLanguageChange(code) }}
                 >
-                    {name}
+                    <Flag code={code} squared className="language-selector__flag" /> {name}
                 </Button>
             );
         });
@@ -36,7 +37,7 @@ class LanguageSelector extends React.Component {
 
     render() {
         return (
-            <ButtonGroup>
+            <ButtonGroup className="language-selector">
                 {this.renderLanguages()}
             </ButtonGroup>
         )
