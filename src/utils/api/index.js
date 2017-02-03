@@ -6,7 +6,7 @@ import { intersection } from 'lodash';
 import type { Course } from 'flow/types';
 import { getPeriod } from 'utils/semesters';
 
-const client = axios.create({
+export const client = axios.create({
     baseURL: 'https://opetushallinto.cs.helsinki.fi',
 }); 
 
@@ -60,16 +60,18 @@ function filterByLanguages(languages: string[]): (Course) => boolean {
     };
 }
 
-export function getCourses({ languages }: { languages?: string[] }): Promise<Course[]> {
+export function getCourses({ languages, semester, year }: { languages?: string[], semester: string, year: number }): Promise<Course[]> {
     const filters = [filterExams];
     
     if (languages && languages.length > 0) {
         filters.push(filterByLanguages(languages));
     }
 
+    const query = `semester=${semester}&year=${year}`;
+
     const mergedFilter = (course: Course): boolean => !filters.map(f => f(course)).some(value => !value);
 
-    return client.get('/courses_list.json')
+    return client.get(`/courses_list.json?${query}`)
         .then(({ data }) => data.map(toCourse))
         .then(courses => courses.filter(mergedFilter));
 }

@@ -6,17 +6,19 @@ import { Button, ButtonGroup } from 'reactstrap';
 import { connect } from 'react-redux';
 
 import connectTranslations from 'components/connect-translations';
-import { updateYear, updateSemesters, updateLanguages } from 'state/filters';
+import { updateYear, updatePaginatorYear, updateSemester, updateLanguages } from 'state/filters';
 import { fetchCourses } from 'state/courses';
 import type { Translations } from 'flow/types';
 
 type Props = {
     translations: Translations,
     year: number,
-    semesters: string[],
+    paginatorYear: number,
+    semester: string,
     languages: string[],
     onYearChange: (number) => void,
-    onSemestersChange: (string[]) => void,
+    onPaginatorYearChange: (number) => void,
+    onSemesterChange: (string) => void,
     onLanguagesChange: (string[]) => void,
     onApplyFilters: () => void,
 };
@@ -26,51 +28,68 @@ class SearchFilters extends React.Component {
 
     static defaultProps = {}
 
-    onYearChange(e) {
-        this.props.onYearChange(+e.target.value);
-    }
-
-    renderYearFilter() {
-        return (
-            <div className="search-filters__filter form-group">
-                <input type="number" id="search-filters-year" value={this.props.year} onChange={this.onYearChange.bind(this)} placeholder={this.props.translations.t('year')} className="form-control search-filters__year-input" />
-                <div className="text-muted search-filters__label">{this.props.translations.t('year')}</div>
-            </div>
-        );
-    }
-
-    semesterIsActive(semester: string): boolean {
-        return this.props.semesters.indexOf(semester) >= 0;
+    getYear(semester: string): number {
+        return semester === 'autumn'
+            ? this.props.paginatorYear - 1
+            : this.props.paginatorYear;
     }
 
     onChooseSemester(semester: string) {
-        const newSemesters = this.semesterIsActive(semester)
-            ? [...[], ...this.props.semesters].filter(s => s !== semester)
-            : [...[], ...this.props.semesters, semester];
+        this.props.onSemesterChange(semester);
+        this.props.onYearChange(this.getYear(semester));
+       
+       this.props.onApplyFilters();
+    }
 
-        this.props.onSemestersChange(newSemesters);
+    semesterIsActive(targetSemester: string): boolean {
+        const { semester, year, paginatorYear } = this.props;
+
+        const isChosenSemester = targetSemester === semester;
+        const isInTimeFrame = (['spring', 'summer'].includes(targetSemester) && year === paginatorYear) || (targetSemester === 'autumn' && year === paginatorYear - 1);
+
+        return isChosenSemester && isInTimeFrame;
+    }
+
+    onNextYear() {
+        this.props.onPaginatorYearChange(this.props.paginatorYear + 1);
+    }
+
+    onPreviousYear() {
+        this.props.onPaginatorYearChange(this.props.paginatorYear - 1);
     }
 
     renderSemesterFilter() {
-        const options = ['spring', 'autumn', 'summer'].map(value => ({ value, label: this.props.translations.t(value) }));
+        const options = ['autumn', 'spring', 'summer'].map(value => ({ value, label: this.props.translations.t(value) }));
 
         return (
             <div className="search-filters__filter">
                 <ButtonGroup>
+                    <Button onClick={this.onPreviousYear.bind(this)}>
+                        &laquo;
+                    </Button>
                     {options.map(({ value, label }) => (
                         <Button 
-                            active={this.semesterIsActive(value)} 
+                            active={this.semesterIsActive(value)}
                             key={value} 
                             onClick={() => { this.onChooseSemester(value) }}
                         >
                             {label}
                         </Button>
                     ))}
+                    <Button onClick={this.onNextYear.bind(this)}>
+                        &raquo;
+                    </Button>
                 </ButtonGroup>
 
-                <div className="text-muted search-filters__label">{this.props.translations.t('semester')}</div>
+                <div className="text-muted search-filters__label">{this.props.translations.t('semester')} {this.props.paginatorYear - 1} - {this.props.paginatorYear}</div>
             </div>
         );
+    }
+
+    onLanguagesChange(languages: string[]) {
+        this.props.onLanguagesChange(languages);
+
+        this.props.onApplyFilters();
     }
 
     renderLanguageFilter() {
@@ -85,24 +104,10 @@ class SearchFilters extends React.Component {
                 <SelectMultiple
                     options={options}
                     values={this.props.languages}
-                    label={this.props.translations.t('language')}
-                    onChange={this.props.onLanguagesChange}
+                    label={this.props.translations.t('teachingLanguage')}
+                    onChange={this.onLanguagesChange.bind(this)}
                 />
-                <div className="text-muted search-filters__label">{this.props.translations.t('language')}</div>
-            </div>
-        );
-    }
-
-    filtersAreValid(): boolean {
-        return this.props.semesters.length > 0 && !!this.props.year;
-    }
-
-    renderButton() {
-        return (
-            <div className="search-filters__filter">
-                <button disabled={!this.filtersAreValid()} className="btn btn-primary" onClick={this.props.onApplyFilters}>
-                    {this.props.translations.t('findCourses')}
-                </button>
+                <div className="text-muted search-filters__label">{this.props.translations.t('teachingLanguage')}</div>
             </div>
         );
     }
@@ -111,9 +116,7 @@ class SearchFilters extends React.Component {
         return (
             <div className="search-filters">
                 {this.renderSemesterFilter()}
-                {this.renderYearFilter()}
                 {this.renderLanguageFilter()}
-                {this.renderButton()}
             </div>
         );
     }
@@ -121,13 +124,15 @@ class SearchFilters extends React.Component {
 
 const mapStateToProps = (state: Object) => ({
     year: state.filters.year,
-    semesters: state.filters.semesters,
+    semester: state.filters.semester,
     languages: state.filters.languages,
+    paginatorYear: state.filters.paginatorYear,
 });
 
 const mapDispatchToProps = (dispatch: any) => ({
     onYearChange: year => { dispatch(updateYear(year)) },
-    onSemestersChange: semesters => { dispatch(updateSemesters(semesters)) },
+    onPaginatorYearChange: year => { dispatch(updatePaginatorYear(year)) },
+    onSemesterChange: semester => { dispatch(updateSemester(semester)) },
     onLanguagesChange: languages => { dispatch(updateLanguages(languages)) },
     onApplyFilters: () => { dispatch(fetchCourses()) },
 });

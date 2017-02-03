@@ -10,7 +10,7 @@ const translations = {
         "finnish": "Suomi",
         "swedish": "Ruotsi",
         "english": "Englanti",
-        "language": "Kieli",
+        "teachingLanguage": "Opetuskieli",
         "coursesCount": "%{count} kurssia",
         "period": "Periodi",
         "learningOpportunityTypeCodes":{
@@ -81,7 +81,7 @@ const translations = {
         "finnish": "Finska",
         "swedish": "Svenska",
         "english": "Engelska",
-        "language": "Språk",
+        "teachingLanguage": "Undervisningsspråk",
         "coursesCount": "%{count} kurser",
         "period": "Period",
         "learningOpportunityTypeCodes":{
@@ -152,7 +152,7 @@ const translations = {
         "finnish": "Finnish",
         "swedish": "Swedish",
         "english": "English",
-        "language": "Language",
+        "teachingLanguage": "Teaching language",
         "coursesCount": "%{count} courses",
         "period": "Period",
         "learningOpportunityTypeCodes":{

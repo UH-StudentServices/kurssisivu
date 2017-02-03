@@ -10,9 +10,9 @@ export function fetchCourses() {
     return (dispatch: () => void, getState: () => Object, { api }: { api: any }) => {
         dispatch(fetchCoursesAction());
 
-        const { filters: { languages } } = getState();
+        const { filters: { languages, semester, year } } = getState();
 
-        return api.getCourses({ languages })
+        return api.getCourses({ languages, semester, year })
             .then(courses => dispatch(fetchCoursesSuccess(courses)))
             .catch(() => dispatch(fetchCoursesError()));
     };
