@@ -40,10 +40,14 @@ class Course extends React.Component {
     }
 
     renderDates() {
-        const { startDate, endDate } = this.props.course;
+        const { startDate, endDate, period } = this.props.course;
+
+        const periodInfo = period
+            ? `· ${this.props.translations.t('period')} ${period}`
+            : null;
 
         return (
-            <small className="text-muted">{this.formatDate(startDate)} - {this.formatDate(endDate)}</small>
+            <small className="text-muted">{this.formatDate(startDate)} - {this.formatDate(endDate)} {periodInfo}</small>
         );
     }
 

@@ -4,6 +4,7 @@ import axios from 'axios';
 import { intersection } from 'lodash';
 
 import type { Course } from 'flow/types';
+import { getPeriod } from 'utils/semesters';
 
 const client = axios.create({
     baseURL: 'https://opetushallinto.cs.helsinki.fi',
@@ -38,6 +39,7 @@ function toCourse(rawCourse: Object): Course {
         languages,
         startDate: new Date(start_date),
         endDate: new Date(end_date),
+        period: getPeriod(new Date(start_date)),
         creditPoints: credit_points,
         learningOpportunityId: learningopportunity_id.toString(),
         realisationName: realisation_name,

@@ -12,6 +12,7 @@ const translations = {
         "english": "Englanti",
         "language": "Kieli",
         "coursesCount": "%{count} kurssia",
+        "period": "Periodi",
         "learningOpportunityTypeCodes":{
             "c1":"Yleisopinnot",
             "c2":"Aineopinnot",
@@ -82,6 +83,7 @@ const translations = {
         "english": "Engelska",
         "language": "Språk",
         "coursesCount": "%{count} kurser",
+        "period": "Period",
         "learningOpportunityTypeCodes":{
             "c1":"Allmänna studier",
             "c2":"Ämnesstudier",
@@ -152,6 +154,7 @@ const translations = {
         "english": "English",
         "language": "Language",
         "coursesCount": "%{count} courses",
+        "period": "Period",
         "learningOpportunityTypeCodes":{
             "c1":"General studies",
             "c2":"Intermediate studies",

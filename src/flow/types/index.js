@@ -12,6 +12,7 @@ export type Course = {
     realisationName: ({ langcode: string, text: string })[],
     realisationTypeCode: string,
     startDate: Date,
+    period: ?string,
 };
 
 export type Translations = {
