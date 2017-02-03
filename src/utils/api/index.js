@@ -12,6 +12,7 @@ export const client = axios.create({
 
 const SEMINAR_REALISATION = '10';
 const LABORATORY_REALISATION = '22';
+const ADVANCED_STUDIES_LEARNING_OPPORTUNITY = '3';
 
 function toCourse(rawCourse: Object): Course {
     const { 
@@ -30,7 +31,7 @@ function toCourse(rawCourse: Object): Course {
 
     if (realisation_type_code.toString() === SEMINAR_REALISATION) {
         learningOpportunityTypeCode = '_1';
-    } else if (realisation_type_code.toString() === LABORATORY_REALISATION) {
+    } else if (realisation_type_code.toString() === LABORATORY_REALISATION && learningopportunity_type_code.toString() !== ADVANCED_STUDIES_LEARNING_OPPORTUNITY) {
         learningOpportunityTypeCode = '_2';
     }
 
