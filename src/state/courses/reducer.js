@@ -1,8 +1,9 @@
 // @flow
 
 import { createReducer } from 'redux-create-reducer';
-import { groupBy, keys } from 'lodash';
+import { groupBy, keys, mapValues, sortBy } from 'lodash';
 
+import type { Course } from 'flow/types';
 import { FETCH_COURSES, FETCH_COURSES_SUCCESS, FETCH_COURSES_ERROR } from './actions';
 
 export type State = {
@@ -19,9 +20,9 @@ const initialState = {
     coursesByLearningOpportunities: {}
 };
 
-const learningOpportunityOrdering = ['12', '2', '_2', '3', '33', '_1', '4'];
+function sortByLearningOpportunities (a: string, b: string): number {
+    const learningOpportunityOrdering = ['12', '2', '_2', '3', '33', '_1', '4'];
 
-const sortByLearningOpportunities = (a: string, b: string): number => {
     const aIndex = learningOpportunityOrdering.indexOf(a);
     const bIndex = learningOpportunityOrdering.indexOf(b);
 
