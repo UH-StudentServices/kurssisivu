@@ -10,14 +10,41 @@ import './styles/index.scss';
 
 import CourseApp from 'components/course-app';
 import store from 'state/store';
+import { updateOrganization } from 'state/filters';
 import { load } from 'utils/dependency-loader';
 
-load()
-    .then(() => {
-        render(
-            <Provider store={store}>
-                <CourseApp />
-            </Provider>,
-            document.getElementById('course-app-root'),
-        );
-    });
+function getRoot(): any {
+    return document.getElementById('course-app-root');
+}
+
+function getOrganization(): string | null {
+    const root = getRoot();
+
+    return root && root.getAttribute('data-organization')
+        ? root.getAttribute('data-organization')
+        : null;
+}
+
+function initializeOrganization(): void {
+    const organization = getOrganization();
+
+    if (organization) {
+        store.dispatch(updateOrganization(organization));
+    }
+}
+
+function initializeApp(): void {
+    initializeOrganization();
+
+    load()
+        .then(() => {
+            render(
+                <Provider store={store}>
+                    <CourseApp />
+                </Provider>,
+                getRoot(),
+            );
+        });
+}
+
+initializeApp();

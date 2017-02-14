@@ -65,7 +65,7 @@ function filterByLanguages(languages: string[]): (Course) => boolean {
     };
 }
 
-export function getCourses({ languages, semester, year }: { languages?: string[], semester: string, year: number }): Promise<Course[]> {
+export function getCourses({ languages, semester, year, organization }: { languages?: string[], semester: string, year: number, organization: string }): Promise<Course[]> {
     const filters = [filterExams];
     
     if (languages && languages.length > 0) {
@@ -76,7 +76,7 @@ export function getCourses({ languages, semester, year }: { languages?: string[]
 
     const mergedFilter = (course: Course): boolean => !filters.map(f => f(course)).some(value => !value);
 
-    return getClient().get(`/courses_list.json?${query}`)
+    return getClient().get(`/organizations/${organization}/courses_list.json?${query}`)
         .then(({ data }) => data.map(toCourse))
         .then(courses => courses.filter(mergedFilter));
 }

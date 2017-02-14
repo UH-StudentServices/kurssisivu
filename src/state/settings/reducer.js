@@ -22,7 +22,7 @@ const initialState = {
 };
 
 export default createReducer(initialState, {
-    [UPDATE_LANGUAGE](state, { language }) {
+    [UPDATE_LANGUAGE](state: State, { language }): State {
         setClientLanguage(language);
 
         return Object.assign({}, state, { language });

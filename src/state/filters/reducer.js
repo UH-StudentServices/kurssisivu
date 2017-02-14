@@ -3,7 +3,7 @@
 import { createReducer } from 'redux-create-reducer';
 import moment from 'moment';
 
-import { UPDATE_YEAR, UPDATE_PAGINATOR_YEAR, UPDATE_SEMESTER, UPDATE_LANGUAGES } from './actions';
+import { UPDATE_YEAR, UPDATE_PAGINATOR_YEAR, UPDATE_SEMESTER, UPDATE_LANGUAGES, UPDATE_ORGANIZATION } from './actions';
 import { getSemester } from 'utils/semesters';
 
 export type State = {
@@ -11,6 +11,7 @@ export type State = {
     year: number,
     paginatorYear: number,
     languages: Array<string>,
+    organization: string,
 };
 
 function getYear(): number {
@@ -22,6 +23,7 @@ const initialState = {
     year: getYear(),
     paginatorYear: getYear(),
     languages: [],
+    organization: 'H523',
 };
 
 export default createReducer(initialState, {
@@ -36,5 +38,8 @@ export default createReducer(initialState, {
     },
     [UPDATE_LANGUAGES](state: State, { languages }): State {
         return Object.assign({}, state, { languages });
+    },
+    [UPDATE_ORGANIZATION](state: State, { organization }): State {
+        return Object.assign({}, state, { organization })
     },
 });

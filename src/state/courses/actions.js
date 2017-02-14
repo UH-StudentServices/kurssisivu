@@ -12,9 +12,9 @@ export function fetchCourses() {
     return (dispatch: () => void, getState: () => State, { api }: ThunkArguments) => {
         dispatch(fetchCoursesAction());
 
-        const { filters: { languages, semester, year } } = getState();
+        const { filters: { languages, semester, year, organization } } = getState();
 
-        return api.getCourses({ languages, semester, year })
+        return api.getCourses({ languages, semester, year, organization })
             .then(courses => dispatch(fetchCoursesSuccess(courses)))
             .catch(() => dispatch(fetchCoursesError()));
     };

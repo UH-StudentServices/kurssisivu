@@ -4,6 +4,7 @@ export const UPDATE_YEAR = 'FILTERS_UPDATE_YEAR';
 export const UPDATE_SEMESTER = 'FILTERS_UPDATE_SEMESTER';
 export const UPDATE_LANGUAGES = 'FILTERS_UPDATE_LANGUAGES';
 export const UPDATE_PAGINATOR_YEAR = 'FILTERS_UPDATE_PAGINATOR_YEAR';
+export const UPDATE_ORGANIZATION = 'FILTERS_UPDATE_ORGANIZATION';
 
 export function updateYear(year: number): { type: string, year: number } {
     return {
@@ -30,5 +31,12 @@ export function updateLanguages(languages: string[]): { type: string, languages:
     return {
         type: UPDATE_LANGUAGES,
         languages,
+    };
+}
+
+export function updateOrganization(organization: string): { type: string, organization: string } {
+    return {
+        type: UPDATE_ORGANIZATION,
+        organization,
     };
 }
