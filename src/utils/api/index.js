@@ -6,13 +6,17 @@ import { intersection } from 'lodash';
 import type { Course } from 'flow/types';
 import { getPeriod } from 'utils/semesters';
 
-export const client = axios.create({
+const client = axios.create({
     baseURL: 'https://opetushallinto.cs.helsinki.fi',
 }); 
 
 const SEMINAR_REALISATION = '10';
 const LABORATORY_REALISATION = '22';
 const ADVANCED_STUDIES_LEARNING_OPPORTUNITY = '3';
+
+export function getClient() {
+    return client;
+}
 
 function toCourse(rawCourse: Object): Course {
     const { 
@@ -72,7 +76,7 @@ export function getCourses({ languages, semester, year }: { languages?: string[]
 
     const mergedFilter = (course: Course): boolean => !filters.map(f => f(course)).some(value => !value);
 
-    return client.get(`/courses_list.json?${query}`)
+    return getClient().get(`/courses_list.json?${query}`)
         .then(({ data }) => data.map(toCourse))
         .then(courses => courses.filter(mergedFilter));
 }

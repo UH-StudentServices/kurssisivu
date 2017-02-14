@@ -38,9 +38,9 @@ export default createReducer(initialState, {
         const learningOpportunityOrder = keys(coursesByLearningOpportunities)
             .sort(sortByLearningOpportunities);
 
-        return Object.assign({}, state, { 
-            loading: false, 
-            error: false, 
+        return Object.assign({}, state, {
+            loading: false,
+            error: false,
             learningOpportunityOrder,
             coursesByLearningOpportunities,
         });
