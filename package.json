@@ -4,20 +4,23 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/ava/cli.js",
+    "test": "./node_modules/ava/cli.js --fail-fast",
+    "test:watch": "./node_modules/ava/cli.js --watch",
     "dev": "NODE_ENV=development ./node_modules/webpack-dev-server/bin/webpack-dev-server.js",
     "build": "rm -rf ./dist && NODE_ENV=production ./node_modules/webpack/bin/webpack.js",
     "flow-check": "./node_modules/flow-bin/cli.js check"
   },
   "ava": {
     "require": [
-      "babel-register"
+      "babel-register",
+      "./resolve-modules.js"
     ],
     "babel": "inherit"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "app-module-path": "2.2.0",
     "autoprefixer": "6.7.0",
     "ava": "^0.17.0",
     "babel-cli": "^6.22.2",
