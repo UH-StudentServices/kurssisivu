@@ -2,7 +2,7 @@ import test from 'ava';
 import sinon from 'sinon';
 
 import { _api, getCourses } from '../index';
-import { toCourse } from '../utils';
+import { toCourse, makeFilter } from '../utils';
 
 function createCourse({ languages, realisationTypeCode, learningOpportunityId } = {}) {
   return {
@@ -18,18 +18,22 @@ function createCourse({ languages, realisationTypeCode, learningOpportunityId } 
   };
 }
 
-test.serial.cb('getCourses function calls correct API path', t => {
-  const sandbox = sinon.sandbox.create();
+test.beforeEach(t => {
+  t.context.sandbox = sinon.sandbox.create();
+});
 
-  const getStub = sandbox.stub().returns(Promise.resolve({ data: [] }));
-  const clientStub = sandbox.stub(_api, 'getClient').returns({ get: getStub });
+test.afterEach(t => {
+  t.context.sandbox.restore();
+});
+
+test.serial.cb('getCourses function calls correct API path', t => {
+  const getStub = t.context.sandbox.stub().returns(Promise.resolve({ data: [] }));
+  const clientStub = t.context.sandbox.stub(_api, 'getClient').returns({ get: getStub });
 
   getCourses({ languages: ['fi'], semester: 'spring', year: 2016, organization: 'HY' })
     .then(() => {
       t.true(getStub.calledOnce);
       t.true(getStub.calledWith('/organizations/HY/courses_list.json?semester=spring&year=2016'));
-      
-      sandbox.restore();
       
       t.end();
     })
@@ -39,28 +43,22 @@ test.serial.cb('getCourses function calls correct API path', t => {
     });  
 });
 
-test.serial.cb('getCourses function filters courses correctly', t => {
-  const sandbox = sinon.sandbox.create();
+test('makeFilter function filters out exams', t => {
+  const courses = [createCourse(), createCourse({ realisationTypeCode: '8' })];
 
-  const getStub = sandbox.stub().returns(Promise.resolve({ 
-    data: [createCourse(), createCourse({ languages: [{ langcode: 'sv' }] })], 
-  }));
+  const filteredCourses = courses.map(toCourse).filter(makeFilter())
+  
+  t.is(filteredCourses.length, 1);
+  t.is(filteredCourses[0].realisationTypeCode, '1');
+});
 
-  const clientStub = sandbox.stub(_api, 'getClient').returns({ get: getStub });
+test('makeFilter function filters courses by languages correctly', t => {
+  const courses = [createCourse(), createCourse({ languages: [{ langcode: 'sv' }] })];
 
-  getCourses({ languages: ['sv'], semester: 'spring', year: 2016, organization: 'HY' })
-    .then(courses => {
-      t.is(courses.length, 1);
-      t.is(courses[0].languages[0].langcode, 'sv');
-
-      sandbox.restore();
-
-      t.end();
-    })
-    .catch(err => {
-      t.fail();
-      t.end();
-    });
+  const filteredCourses = courses.map(toCourse).filter(makeFilter({ languages: ['sv'] }))
+  
+  t.is(filteredCourses.length, 1);
+  t.is(filteredCourses[0].languages[0].langcode, 'sv');
 });
 
 test('toCourse function sets correct learning opportunity type code', t => {

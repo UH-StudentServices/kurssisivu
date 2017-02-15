@@ -8,6 +8,16 @@ const SEMINAR_REALISATION = '10';
 const LABORATORY_REALISATION = '22';
 const ADVANCED_STUDIES_LEARNING_OPPORTUNITY = '3';
 
+export function makeFilter({ languages = [] }: { languages: string[] } = {}): (course: Course) => boolean {
+  const filters = [filterExams];
+    
+  if (languages && languages.length > 0) {
+      filters.push(filterByLanguages(languages));
+  }
+
+  return (course: Course): boolean => filters.reduce((value, filter) => value && filter(course), true);
+}
+
 export function toCourse(rawCourse: Object): Course {
     const { 
         course_id, 

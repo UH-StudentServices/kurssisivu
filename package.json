@@ -11,6 +11,9 @@
     "flow-check": "./node_modules/flow-bin/cli.js check"
   },
   "ava": {
+    "files": [
+      "./src/**/__tests__/*.js"
+    ],
     "require": [
       "babel-register",
       "./resolve-modules.js"
