@@ -12,7 +12,7 @@ import { selectLearningOpportunies } from 'selectors/courses';
 
 type Props = {
     onFetchCourses: () => void,
-    learningOpportunies: ({ learningOpportunityId: string, courses: CourseType[] })[],
+    learningOpportunities: ({ learningOpportunityId: string, courses: CourseType[] })[],
     loadingCourses: boolean,
     translations: Translations,
 };
@@ -24,8 +24,8 @@ export class CourseApp extends React.Component {
         this.props.onFetchCourses();
     }
 
-    renderCourseGroups() {
-        return this.props.learningOpportunies.map(({ learningOpportunityId, courses }) => {
+    renderCourseGroupList() {
+        return this.props.learningOpportunities.map(({ learningOpportunityId, courses }) => {
             return (
                 <div className="course-app__learning-opportunity-type" key={learningOpportunityId}>
                     <CourseGroup 
@@ -37,9 +37,17 @@ export class CourseApp extends React.Component {
         });
     }
 
+    renderCourseGroups() {
+        return (
+            <div className="course-app__learning-opportunities">
+                {this.renderCourseGroupList()}
+            </div>
+        );
+    }
+
     renderLoading() {
         return (
-            <div className="text-center text-muted">
+            <div className="text-center text-muted course-app__loading-courses">
                 {this.props.translations.t('loading')}...
             </div>
         );
@@ -58,7 +66,7 @@ export class CourseApp extends React.Component {
 }
 
 const mapStateToProps = (state: Object) => ({
-    learningOpportunies: selectLearningOpportunies(state),
+    learningOpportunities: selectLearningOpportunies(state),
     loadingCourses: state.courses.loading,
 });
 

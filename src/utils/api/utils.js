@@ -8,7 +8,7 @@ const SEMINAR_REALISATION = '10';
 const LABORATORY_REALISATION = '22';
 const ADVANCED_STUDIES_LEARNING_OPPORTUNITY = '3';
 
-export function makeFilter({ languages = [] }: { languages: string[] } = {}): (course: Course) => boolean {
+export function makeFilter({ languages = [] }: { languages?: string[] } = {}): (course: Course) => boolean {
   const filters = [filterExams];
     
   if (languages && languages.length > 0) {

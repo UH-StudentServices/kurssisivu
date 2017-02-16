@@ -14,7 +14,7 @@ type Props = {
     translations: Translations,
 }
 
-class Course extends React.Component {
+export class Course extends React.Component {
     props: Props
 
     renderLink() {

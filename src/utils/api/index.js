@@ -22,5 +22,5 @@ export function getCourses({ languages, semester, year, organization }: { langua
 
     return _api.getClient().get(`/organizations/${organization}/courses_list.json?${query}`)
         .then(({ data }) => data.map(toCourse))
-        .then(courses => courses.filter(makeFilter({ languages: languages || [] })));
+        .then(courses => courses.filter(makeFilter({ languages: languages })));
 }

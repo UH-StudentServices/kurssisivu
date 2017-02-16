@@ -44,9 +44,8 @@ export function getPeriod(date: Date): ?string {
         : null;
 }
 
-export function getSemester(): string {
-    const now = moment().toDate();
-    const year = moment().get('years');
+export function getSemesterByDate(date: Date): string {
+    const year = moment(date).get('years');
 
     const autumnRange = [
         new Date(year, 8, 5),
@@ -58,11 +57,15 @@ export function getSemester(): string {
         new Date(year, 4, 7),
     ];
 
-    if (withinDates(now, autumnRange)) {
+    if (withinDates(date, autumnRange)) {
         return 'autumn'
-    } else if (withinDates(now, springRange)) {
+    } else if (withinDates(date, springRange)) {
         return 'spring';
     } else {
         return 'summer';
     }
+}
+
+export function getSemester(): string {
+    return getSemesterByDate(new Date());
 }
