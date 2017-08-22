@@ -23,7 +23,6 @@ const initialState = {
     year: getYear(),
     paginatorYear: getYear(),
     languages: [],
-    organization: 'H523',
 };
 
 export default createReducer(initialState, {

@@ -48,7 +48,7 @@ export function getSemesterByDate(date: Date): string {
     const year = moment(date).get('years');
 
     const autumnRange = [
-        new Date(year, 8, 5),
+        new Date(year, 7, 15),
         new Date(year, 11, 18),
     ];
 

@@ -34,7 +34,7 @@ module.exports = {
         new webpack.DefinePlugin({
             'process.env': {
                 NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'development'),
-                ASSETS_URL: JSON.stringify(isDevelopment ? '/dist' : 'https://kalleilv.users.cs.helsinki.fi/course-app/dist'),  
+                ASSETS_URL: JSON.stringify(isDevelopment ? '/dist' : 'https://www.cs.helsinki.fi/u/mluukkai/cdn'),  
             },
         }),
         new ExtractTextPlugin('app.css'),

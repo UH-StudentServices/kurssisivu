@@ -64,9 +64,6 @@ class SearchFilters extends React.Component {
         return (
             <div className="search-filters__filter">
                 <ButtonGroup>
-                    <Button onClick={this.onPreviousYear.bind(this)}>
-                        &laquo;
-                    </Button>
                     {options.map(({ value, label }) => (
                         <Button 
                             active={this.semesterIsActive(value)}
@@ -76,12 +73,7 @@ class SearchFilters extends React.Component {
                             {label}
                         </Button>
                     ))}
-                    <Button onClick={this.onNextYear.bind(this)}>
-                        &raquo;
-                    </Button>
                 </ButtonGroup>
-
-                <div className="text-muted search-filters__label">{this.props.translations.t('semester')} {this.props.paginatorYear - 1} - {this.props.paginatorYear}</div>
             </div>
         );
     }
