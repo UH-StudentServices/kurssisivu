@@ -30,7 +30,7 @@ And navigate to [http://localhost:8080/webpack-dev-server/index.html](http://loc
 Course App can be embedded to any web page using the following `div` tag:
 
 ```html
-<div id="course-app-root"></div>
+<div id="course-app-root" data-organization="ORGANIZATION_CODE"></div>
 ```
 
 You'll also need to include the following `script` tag at the end of your page's `body` tag:
@@ -52,5 +52,3 @@ npm run-script build
 ```
 
 Webpack will output a `app.js` and `app.css` files inside the `dist` folder.
-
-TODO: Rest of the deployment
