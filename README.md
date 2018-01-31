@@ -39,6 +39,13 @@ You'll also need to include the following `script` tag at the end of your page's
 <script src="URL_COMING_SOON/app.js"></script>
 ```
 
+Course App can also be embedded the following way:
+```html
+import { CoursesApp } from 'courses-app';
+
+<CoursesApp dataOrganization="ORGANIZATION_CODE" />
+```
+
 TODO: Correct url for the script tag.
 
 ## Deployment

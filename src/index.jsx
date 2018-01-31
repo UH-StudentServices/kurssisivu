@@ -27,7 +27,6 @@ function getOrganization(): string | null {
 
 function initializeOrganization(): void {
     const organization = getOrganization();
-
     if (organization) {
         store.dispatch(updateOrganization(organization));
     }
@@ -35,7 +34,6 @@ function initializeOrganization(): void {
 
 function initializeApp(): void {
     initializeOrganization();
-
     load()
         .then(() => {
             render(
@@ -48,3 +46,8 @@ function initializeApp(): void {
 }
 
 initializeApp();
+
+export const CoursesApp = props => {
+    store.dispatch(updateOrganization(props.dataOrganization));
+    return (<div id="course-app-root" />)
+};

@@ -12,13 +12,16 @@ module.exports = {
         path: path.join(__dirname, 'dist'),
         filename: 'app.js',
         publicPath: 'dist',
+        libraryTarget: 'commonjs2'
     },
     module: {
         rules: [
             {
-                test: /.jsx?$/,
-                use: ['babel-loader'],
-                exclude: /node_modules/,
+                test: /\.(js|jsx)$/,
+                use: {
+                    loader: 'babel-loader'
+                },
+                exclude: /(node_modules|dist)/,
             },
             {
                 test: /\.scss$/,
@@ -34,7 +37,7 @@ module.exports = {
         new webpack.DefinePlugin({
             'process.env': {
                 NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'development'),
-                ASSETS_URL: JSON.stringify(isDevelopment ? '/dist' : 'https://www.cs.helsinki.fi/u/mluukkai/cdn'),  
+                ASSETS_URL: JSON.stringify(isDevelopment ? '/dist' : 'https://www.cs.helsinki.fi/u/mluukkai/cdn'),
             },
         }),
         new ExtractTextPlugin('app.css'),

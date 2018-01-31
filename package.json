@@ -2,7 +2,7 @@
   "name": "courses-app",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "dist/app.js",
   "scripts": {
     "test": "./node_modules/ava/cli.js --fail-fast",
     "test:watch": "./node_modules/ava/cli.js --watch",
@@ -20,8 +20,9 @@
     ],
     "babel": "inherit"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Kalle Ilves",
+  "url": "https://github.com/UniversityOfHelsinkiCS/kurssisivu",
+  "license": "MIT",
   "devDependencies": {
     "app-module-path": "2.2.0",
     "autoprefixer": "6.7.0",
@@ -36,7 +37,7 @@
     "browser-env": "2.0.21",
     "css-loader": "0.26.1",
     "enzyme": "2.7.1",
-    "extract-text-webpack-plugin": "2.0.0-rc.2",
+    "extract-text-webpack-plugin": "2.1.2",
     "flow-bin": "0.38.0",
     "node-sass": "4.4.0",
     "postcss-loader": "1.2.2",
