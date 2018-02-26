@@ -40,6 +40,7 @@
     "extract-text-webpack-plugin": "2.1.2",
     "flow-bin": "0.38.0",
     "node-sass": "4.4.0",
+    "parallel-webpack": "2.2.0",
     "postcss-loader": "1.2.2",
     "react-addons-test-utils": "15.4.2",
     "sass-loader": "4.1.1",
