@@ -2,7 +2,7 @@
   "name": "courses-app",
   "version": "1.1.0",
   "description": "",
-  "main": "dist/app.js",
+  "main": "dist/app.commonjs2.js",
   "scripts": {
     "test": "./node_modules/ava/cli.js --fail-fast",
     "test:watch": "./node_modules/ava/cli.js --watch",

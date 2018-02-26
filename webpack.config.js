@@ -10,29 +10,20 @@ const baseOptions = {
 };
 
 const variants = {
-  target: isDevelopment ? [''] : ['commonjs2', 'var', 'umd', 'amd']
+  target: isDevelopment ? ['var'] : ['commonjs2', 'var', 'umd', 'amd']
 };
 
 function createConfig(options) {
-
-  const prodOutput = {
-    path: path.join(__dirname, 'dist'),
-    filename: 'app.' + options.target + '.js',
-    publicPath: 'dist',
-    libraryTarget: options.target
-  }
-
-  const devOutput = {
-    path: path.join(__dirname, 'dist'),
-    filename: 'app.js',
-    publicPath: 'dist',
-  }
-
     return  {
       watch: options.isDevelopment,
       entry: path.join(__dirname, 'src', 'index.jsx'),
       devtool: options.isDevelopment ? 'eval-source-map': '',
-      output: options.isDevelopment ? devOutput : prodOutput,
+      output: {
+        path: path.join(__dirname, 'dist'),
+        filename: 'app.' + options.target + '.js',
+        publicPath: 'dist',
+        libraryTarget: options.target
+      },
       module: {
         rules: [
           {

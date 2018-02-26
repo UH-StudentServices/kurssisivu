@@ -36,7 +36,7 @@ Course App can be embedded to any web page using the following `div` tag:
 You'll also need to include the following `script` tag at the end of your page's `body` tag:
 
 ```html
-<script src="URL_COMING_SOON/app.js"></script>
+<script src="URL_COMING_SOON/app.var.js"></script>
 ```
 
 Course App can also be embedded the following way:
@@ -58,4 +58,11 @@ To build run:
 npm run-script build
 ```
 
-Webpack will output a `app.js` and `app.css` files inside the `dist` folder.
+Webpack will output styles:
+* app.css
+
+and following different build files inside the `dist` folder:
+* app.var.js
+* app.commonjs2.js
+* app.umd.js
+* app.amd.js
