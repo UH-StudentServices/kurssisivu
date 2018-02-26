@@ -3,25 +3,36 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const path = require('path');
 
 const createVariants = require('parallel-webpack').createVariants;
+
+const isDevelopment = process.env.NODE_ENV === 'development';
 const baseOptions = {
-    isDevelopment: process.env.NODE_ENV === 'development'
+    isDevelopment: isDevelopment
 };
 
 const variants = {
-  target: ['commonjs2', 'var', 'umd', 'amd']
+  target: isDevelopment ? [''] : ['commonjs2', 'var', 'umd', 'amd']
 };
 
 function createConfig(options) {
+
+  const prodOutput = {
+    path: path.join(__dirname, 'dist'),
+    filename: 'app.' + options.target + '.js',
+    publicPath: 'dist',
+    libraryTarget: options.target
+  }
+
+  const devOutput = {
+    path: path.join(__dirname, 'dist'),
+    filename: 'app.js',
+    publicPath: 'dist',
+  }
+
     return  {
       watch: options.isDevelopment,
       entry: path.join(__dirname, 'src', 'index.jsx'),
       devtool: options.isDevelopment ? 'eval-source-map': '',
-      output: {
-        path: path.join(__dirname, 'dist'),
-        filename: 'app.' + options.target + '.js',
-        publicPath: 'dist',
-        libraryTarget: options.target
-      },
+      output: options.isDevelopment ? devOutput : prodOutput,
       module: {
         rules: [
           {
